@@ -1,0 +1,10 @@
+version: "2"
+services:
+  rtorrent_exporter:
+    image: b3vis/rtelegram
+    restart: always
+    container_name: rtelegram
+    environment:
+      - RT_TOKEN="TELEGRAMBOTTOKEN"
+      - RT_MASTERS="USERNAME"
+      - RT_URL="10.0.0.1:5000"
