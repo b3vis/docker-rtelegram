@@ -5,4 +5,5 @@ RUN apk add git --no-cache && \
 
 FROM alpine:latest
 COPY --from=build /go/bin/rtelegram /usr/local/bin/rtelegram
+RUN apk add ca-certificates --no-cache
 CMD /usr/local/bin/rtelegram -url=$RT_URL
