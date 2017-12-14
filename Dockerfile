@@ -1,8 +1,8 @@
-FROM golang:1.8-alpine
+FROM golang:alpine AS build
 MAINTAINER b3vis
-WORKDIR /go/src
 RUN apk add git --no-cache && \
-    go get -u github.com/pyed/rtelegram && \
-    apk del git && \
-    rm -rf /go/src/ /usr/local/go/pkg /usr/local/go/src
-CMD /go/bin/rtelegram -url=$RT_URL
+    go get -u github.com/pyed/rtelegram
+
+FROM alpine:latest
+COPY --from=build /go/bin/rtelegram /usr/local/bin/rtelegram
+CMD /usr/local/bin/rtelegram -url=$RT_URL
